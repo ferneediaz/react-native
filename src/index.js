@@ -11,6 +11,12 @@ job.start();
 
 app.use(express.json());
 app.use(cors());
+
+// Health check endpoint for cron job
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server is running", timestamp: new Date().toISOString() });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 console.log({ PORT });
